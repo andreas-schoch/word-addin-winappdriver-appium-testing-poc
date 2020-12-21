@@ -9,20 +9,23 @@
             <i class="ms-Icon ms-Icon--Ribbon"></i>
             <span class="ms-font-m ms-fontColor-neutralPrimary">Achieve more with Office integration</span>
         </li>
-        <li class="ms-ListItem">
+        <li class="ms-ListItem">i
             <i class="ms-Icon ms-Icon--Unlock"></i>
             <span class="ms-font-m ms-fontColor-neutralPrimary">Unlock features and functionality</span>
         </li>
         <li class="ms-ListItem">
             <i class="ms-Icon ms-Icon--Design"></i>
             <span class="ms-font-m ms-fontColor-neutralPrimary">Create and visualize like a pro</span>
+
         </li>
     </ul>
     <br />
     <br />
-    <p class="ms-font-l">Modify the source files, then click <b>Run</b>.</p>
-    <div role="button" class="ms-welcome__action ms-Button ms-Button--hero ms-u-slideUpIn20" (click)="run()">
-        <span class="ms-Button-label">Run</span>
+
+    <p id="test-id-dot-parent" class="ms-font-l">Modify the source files, then click <b id="test-id-dot">Run</b>.</p>
+    <div role="button" class="ms-welcome__action ms-Button ms-Button--hero ms-u-slideUpIn20" id="my-button-id" (click)="run()"
+         [attr.data-automation-id]="'test-attribute-derp'">
+        <span class="ms-Button-label">Run ME</span>
         <span class="ms-Button-icon"><i class="ms-Icon ms-Icon--ChevronRight"></i></span>
     </div>
 </main>

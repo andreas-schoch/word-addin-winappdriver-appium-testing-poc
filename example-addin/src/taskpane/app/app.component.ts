@@ -29,3 +29,25 @@ export default class AppComponent {
     });
   }
 }
+
+
+
+// Run button xPath by WAD UI Recorder
+// "/Pane[@ClassName=#32769][@Name=Desktop 1]"
+// "/Window[@ClassName=OpusApp][@Name=Document2 - Word]"
+// "/Pane[@ClassName=MsoCommandBarDock][@Name=MsoDockRight]"
+// "/ToolBar[@ClassName=MsoCommandBar]"
+// "/Pane[@ClassName=MsoWorkPane][@Name=My Office Add-in]"
+// "/Pane[@ClassName=NUIPane]"
+// "/Pane[@ClassName=NetUIHWNDElement]"
+// "/Custom[@ClassName=NetUInetpane][@Name=My Office Add-in]"
+// "/Custom[@ClassName=NetUIOcxControl]"
+// "/Pane[@ClassName=OsfAxControl]"
+// "/Pane[@ClassName=Win32WebViewHolder]"
+// "/Pane[@ClassName=CoreApplicationBridgeWindow]"
+// "/Window[@ClassName=Windows.UI.Core.CoreWindow]"
+// "/Window[@ClassName=Windows.UI.Core.CoreWindow]"
+// "/Pane[@ClassName=Internet Explorer_Server][@Name=My Office Add-in]"
+// "/Pane[@Name=My Office Add-in]"
+// "/Group[position()=2]"
+// "/Button[@Name=Run]"

@@ -91,20 +91,53 @@ namespace word_addin_automation_poc_01
             Assert.AreEqual("Word", session.Title, $"Expected Title 'Word' didn't match the actual Title: '{session.Title}'");
 
             clickElementByName(null, "Blank document");
-            clickElementByName(null, "Insert");
-            clickElementByXPath(null, @"//Group[@ClassName=""NetUIChunk""][@Name=""Add-ins""]//SplitButton[@ClassName=""NetUISplitButtonAnchor""][@Name=""My Add-ins""]//MenuItem[@ClassName=""NetUIRibbonButton""][@Name=""More Options""]");
-            // Alternative query in two steps without using XPath syntax
-            // var parentContext = session.FindElementByName("Add-ins");
-            // clickElementByName(parentContext, "More Options");
-            clickElementByName(null, "My Office Add-in");
-            clickElementByName(null, "Show Taskpane");
+            clickElementByName(null, "Script Lab");
+            clickElementByXPath(null, @"//Group[@ClassName=""NetUIChunk""][@Name=""Script""]//Button[@ClassName=""NetUIRibbonButton""][@Name=""Code""]");
+
+            var tab = session.FindElementByAccessibilityId("Pivot21-Tab2");
+            wait.Until(pred => tab.Displayed);
+
+            tab.Click();
+
+            //var rect = tab.GetAttribute("BoundingRectangle");
+
+            //"BoundingRectangle"
+
+            //Debug.WriteLine($"-------------------- {tab.Location.X}, {tab.Location.Y} --------- attr ${tab.GetAttribute("ClickablePoint")}");
+            Debug.WriteLine($"MYDATA-------------------- {tab.Coordinates.LocationInViewport}  -  {tab.Coordinates.LocationInDom} - {tab.Location} - {tab.GetAttribute("BoundingRectangle")}");
+            // Location: 3170, 525 (in legacy webview EdgeHTML only, correct in webview2!)
+            // ClickablePoint: 3206, 541
+            // ACTUAL on screen: 1708, 283 (from top left corner)
 
 
-            System.Threading.Thread.Sleep(5000);
-            //clickElementByXPath(null, @"//Pane[@ClassName=""Internet Explorer_Server""][@Name=""My Office Add-in""]//Pane[@Name=""My Office Add-in""]//Group[position()=2]//Button[@Name=""Run""]");
+            //session.FindElementByImage()
 
-            //session.FindElementByCssSelector("div[role]").Click();
-            var runBtn = session.FindElementByAccessibilityId("my-button-id");
+            var ribbon = session.FindElementByName("Ribbon"); // used as an anchor to know the top left corner
+            //Actions action = new Actions(session);
+            //action.MoveToElement(tab, -1470, -250);
+            //action.MoveToElement(null, 1708, 283);
+            //action.MoveToElement(ribbon, tab.Coordinates.LocationOnScreen.X, tab.Coordinates.LocationOnScreen.Y);
+
+            //action.Click();
+            //action.MoveByOffset(1708, 283);
+            //action.Click(); // it was mentioned that ContextMenu could fail sometimes and that a .Click() can solve the issue somehow
+            //action.ContextClick();
+            //action.Perform();
+
+
+            //clickElementByXPath(null, @"//Group[@ClassName=""NetUIChunk""][@Name=""Add-ins""]//SplitButton[@ClassName=""NetUISplitButtonAnchor""][@Name=""My Add-ins""]//MenuItem[@ClassName=""NetUIRibbonButton""][@Name=""More Options""]");
+            //// Alternative query in two steps without using XPath syntax
+            //// var parentContext = session.FindElementByName("Add-ins");
+            //// clickElementByName(parentContext, "More Options");
+            //clickElementByName(null, "My Office Add-in");
+            //clickElementByName(null, "Show Taskpane");
+
+
+            //System.Threading.Thread.Sleep(5000);
+            ////clickElementByXPath(null, @"//Pane[@ClassName=""Internet Explorer_Server""][@Name=""My Office Add-in""]//Pane[@Name=""My Office Add-in""]//Group[position()=2]//Button[@Name=""Run""]");
+
+            ////session.FindElementByCssSelector("div[role]").Click();
+            //var runBtn = session.FindElementByAccessibilityId("my-button-id");
 
             //ReadOnlyCollection<string> contextNames = session.Contexts;
             //foreach (string context in contextNames) {
