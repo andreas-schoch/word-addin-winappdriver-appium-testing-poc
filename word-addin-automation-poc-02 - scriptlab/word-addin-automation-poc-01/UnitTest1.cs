@@ -12,6 +12,8 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
+using Keys = OpenQA.Selenium.Keys;
 
 // If a popup error appears during debugging saying: "To prevent an unsafe abort when evaluating the function..." --> https://stackoverflow.com/a/58797847
 namespace word_addin_automation_poc_01
@@ -86,77 +88,53 @@ namespace word_addin_automation_poc_01
         public void Test_0002_AddinLaunchesSuccessfullyInsideWord()
         {
             Debug.WriteLine("Inside Test_0002_AddinLaunchesSuccessfullyInsideWord()");
-            // Could fail, as Title is not always a foolproof way to assert things when OS language isn't known in advance. Example: 'Alarm & Clock' vs 'Alarm und Uhr'
-            // Assert.AreEqual("my-document.docx - Word", session.Title, $"Expected Title 'Word' didn't match the actual Title: '{session.Title}'");
-            Assert.AreEqual("Word", session.Title, $"Expected Title 'Word' didn't match the actual Title: '{session.Title}'");
+
+            // OPEN SCRIPTLAB
+
+            System.Threading.Thread.Sleep(10000);
 
             clickElementByName(null, "Blank document");
             clickElementByName(null, "Script Lab");
             clickElementByXPath(null, @"//Group[@ClassName=""NetUIChunk""][@Name=""Script""]//Button[@ClassName=""NetUIRibbonButton""][@Name=""Code""]");
 
-            var tab = session.FindElementByAccessibilityId("Pivot21-Tab2");
-            wait.Until(pred => tab.Displayed);
+            // INSIDE SCRIPTLAB
+            //session.FindElementByName("Samples").Click();
+            System.Threading.Thread.Sleep(1000);
 
-            tab.Click();
+            clickElementByName(null, "Samples");
+
+            System.Threading.Thread.Sleep(1000);
+
+            clickElementByName(null, "Performs a basic Word API call using TypeScript.");
+            clickElementByName(null, "Run");
+            //session.FindElementByName("Run").Click();
+
+            System.Threading.Thread.Sleep(2000);
+            //session.FindElementByName("Run in this pane").Click();
+            //System.Threading.Thread.Sleep(2000);
+
+            // PASTE TEXT TO DOCUMENT
+            //Clipboard.SetText("Hello");
+            //var doc = session.FindElementByAccessibilityId("Body");
+            //doc.Click();
+            ////doc.SendKeys("last christmas i gave you my heart, but the very next day you gave it away. this year, to save me from tears. i'll give it to someone special.");
+
+
+            //doc.SendKeys(Keys.Control + "v");
+
+
+            //session.FindElementByName("Print selection").Click();
+
 
             //var rect = tab.GetAttribute("BoundingRectangle");
 
             //"BoundingRectangle"
 
             //Debug.WriteLine($"-------------------- {tab.Location.X}, {tab.Location.Y} --------- attr ${tab.GetAttribute("ClickablePoint")}");
-            Debug.WriteLine($"MYDATA-------------------- {tab.Coordinates.LocationInViewport}  -  {tab.Coordinates.LocationInDom} - {tab.Location} - {tab.GetAttribute("BoundingRectangle")}");
+            //Debug.WriteLine($"MYDATA-------------------- {tab.Coordinates.LocationInViewport}  -  {tab.Coordinates.LocationInDom} - {tab.Location} - {tab.GetAttribute("BoundingRectangle")}");
             // Location: 3170, 525 (in legacy webview EdgeHTML only, correct in webview2!)
             // ClickablePoint: 3206, 541
             // ACTUAL on screen: 1708, 283 (from top left corner)
-
-
-            //session.FindElementByImage()
-
-            var ribbon = session.FindElementByName("Ribbon"); // used as an anchor to know the top left corner
-            //Actions action = new Actions(session);
-            //action.MoveToElement(tab, -1470, -250);
-            //action.MoveToElement(null, 1708, 283);
-            //action.MoveToElement(ribbon, tab.Coordinates.LocationOnScreen.X, tab.Coordinates.LocationOnScreen.Y);
-
-            //action.Click();
-            //action.MoveByOffset(1708, 283);
-            //action.Click(); // it was mentioned that ContextMenu could fail sometimes and that a .Click() can solve the issue somehow
-            //action.ContextClick();
-            //action.Perform();
-
-
-            //clickElementByXPath(null, @"//Group[@ClassName=""NetUIChunk""][@Name=""Add-ins""]//SplitButton[@ClassName=""NetUISplitButtonAnchor""][@Name=""My Add-ins""]//MenuItem[@ClassName=""NetUIRibbonButton""][@Name=""More Options""]");
-            //// Alternative query in two steps without using XPath syntax
-            //// var parentContext = session.FindElementByName("Add-ins");
-            //// clickElementByName(parentContext, "More Options");
-            //clickElementByName(null, "My Office Add-in");
-            //clickElementByName(null, "Show Taskpane");
-
-
-            //System.Threading.Thread.Sleep(5000);
-            ////clickElementByXPath(null, @"//Pane[@ClassName=""Internet Explorer_Server""][@Name=""My Office Add-in""]//Pane[@Name=""My Office Add-in""]//Group[position()=2]//Button[@Name=""Run""]");
-
-            ////session.FindElementByCssSelector("div[role]").Click();
-            //var runBtn = session.FindElementByAccessibilityId("my-button-id");
-
-            //ReadOnlyCollection<string> contextNames = session.Contexts;
-            //foreach (string context in contextNames) {
-            //    Debug.WriteLine($"----Context: {context}");
-            //}
-
-
-            List<string> AllContexts = new List<string>();
-            foreach (var context in (session.Contexts))
-            {
-                AllContexts.Add(context);
-            }
-
-
-
-
-            System.Threading.Thread.Sleep(1000);
-
-
         }
 
         private static void clickElementByName(WindowsElement customContext, string elementName)
